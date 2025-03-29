@@ -15,6 +15,13 @@ export const Login: React.FC = () => {
     });
   };
 
+  const handleLogout = () => {
+    instance.logout({
+      postLogoutRedirectUri: "/login",
+    })
+  }
+
+
   const fetchUserInfo = async () => {
     if (accounts.length > 0) {
       const authProvider = new AuthCodeMSALBrowserAuthenticationProvider(instance as PublicClientApplication, {
@@ -27,7 +34,7 @@ export const Login: React.FC = () => {
 
       try {
         const user = await client.api("/me").get();
-        setUserInfo(user); // Armazena todas as informações do usuário
+        setUserInfo(user);
       } catch (error) {
         console.error("Erro ao buscar dados do usuário:", error);
       }
@@ -71,12 +78,13 @@ export const Login: React.FC = () => {
       {userInfo ? (
         <div>
           <h3>Informações do Usuário:</h3>
-          <pre>{JSON.stringify(userInfo, null, 2)}</pre> {/* Exibe todas as informações em formato JSON */}
+          <pre>{JSON.stringify(userInfo, null, 2)}</pre>
         </div>
       ) : (
         <>
           <button onClick={fetchUserInfo}>Obter Informações do Usuário</button>
           <button onClick={fetchUserInfoWithAccessToken}>teste</button>
+          <button onClick={handleLogout}>Sair</button>
         </>
       )}
     </div>
