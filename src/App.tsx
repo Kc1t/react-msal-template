@@ -3,7 +3,7 @@ import { MsalProvider } from "@azure/msal-react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { msalInstance } from "./msalConfig";
 import { Login } from "./login";
-import { Callback } from "./cllback";
+import { Callback } from "./callback";
 
 const App: React.FC = () => {
   return (
